@@ -56,7 +56,7 @@ export default function CoreInternalsPage() {
       timestamp: new Date().toLocaleTimeString([], { hour12: false, minute: '2-digit', second: '2-digit' }),
       message,
       type
-    }, ...prev].slice(50));
+    }, ...prev].slice(0, 50));
   }, []);
 
   const resetSimulation = useCallback(() => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StepDefinition, SparkComponentType } from '../../types/internalsTypes';
-import { Database, Server, Cpu, Box, Layers, FileCode } from 'lucide-react';
+import { Database, Server, Cpu, Layers, FileCode } from 'lucide-react';
 
 interface DiagramProps {
   step: StepDefinition;
@@ -40,7 +40,7 @@ const Diagram: React.FC<DiagramProps> = ({ step }) => {
         {active && (
           <circle r="4" fill={particleColor}>
             <animateMotion
-              dur="1.5s"
+              dur="1s"
               repeatCount="indefinite"
               path={pathData}
               keyPoints={id.includes('driver-exec') ? "0;1" : id.includes('exec') ? "1;0" : "0;1"}
@@ -63,7 +63,7 @@ const Diagram: React.FC<DiagramProps> = ({ step }) => {
     const active = isActive(type);
 
     return (
-      <foreignObject x={x - 60} y={y - 50} width="120" height="120" className="overflow-visible">
+      <foreignObject x={x - 60} y={y - 60} width="120" height="120" className="overflow-visible">
         <div
           className={`
             group flex flex-col items-center justify-center w-full h-full transition-all duration-500
@@ -102,7 +102,7 @@ const Diagram: React.FC<DiagramProps> = ({ step }) => {
 
   return (
     <div className="w-full h-full flex items-center justify-center bg-slate-900/50 rounded-3xl border border-slate-800 shadow-2xl overflow-hidden relative">
-      <svg viewBox="0 0 800 600" className="w-full h-full max-w-4xl select-none">
+      <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet" className="w-full h-full max-w-5xl max-h-[700px] select-none">
         <defs>
           <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" style={{ stopColor: 'rgb(59, 130, 246)', stopOpacity: 1 }} />

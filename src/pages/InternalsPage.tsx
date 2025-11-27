@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SPARK_STEPS } from '../constants/internalsConstants';
-import { SparkComponentType } from '../types/internalsTypes';
 import Diagram from '../components/internals/Diagram';
 import ControlPanel from '../components/internals/ControlPanel';
-import { Sparkles, Info, X, Home } from 'lucide-react';
+import { Home } from 'lucide-react';
 
 const InternalsPage: React.FC = () => {
     const navigate = useNavigate();
     const [currentStepIndex, setCurrentStepIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
-    // Removed AI state variables
 
     const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -40,7 +38,7 @@ const InternalsPage: React.FC = () => {
         if (isPlaying) {
             timerRef.current = setInterval(() => {
                 nextStep();
-            }, 3500); // Time per step
+            }, 2000); // Time per step - faster animation
         } else if (timerRef.current) {
             clearInterval(timerRef.current);
         }
@@ -48,13 +46,6 @@ const InternalsPage: React.FC = () => {
             if (timerRef.current) clearInterval(timerRef.current);
         };
     }, [isPlaying, nextStep]);
-
-    const handleComponentClick = async (component: SparkComponentType) => {
-        // Pause animation if user clicks something
-        setIsPlaying(false);
-        // AI functionality removed
-        console.log("Component clicked:", component);
-    };
 
     return (
         <div className="min-h-screen w-full bg-slate-950 text-slate-100 flex flex-col items-center relative overflow-hidden">
@@ -66,7 +57,7 @@ const InternalsPage: React.FC = () => {
             </div>
 
             {/* Header */}
-            <header className="w-full max-w-6xl mx-auto p-6 flex justify-between items-end z-10">
+            <header className="w-full px-6 py-6 flex justify-between items-end z-10">
                 <div>
                     <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
                         Spark Internals
@@ -91,14 +82,13 @@ const InternalsPage: React.FC = () => {
             </header>
 
             {/* Main Content Area */}
-            <main className="flex-1 w-full max-w-6xl mx-auto p-4 flex flex-col md:flex-row gap-6 z-10">
+            <main className="flex-1 w-full px-6 py-4 flex flex-col lg:flex-row gap-6 z-10">
 
                 {/* Left: Visualization */}
                 <div className="flex-1 flex flex-col relative">
-                    <div className="flex-1 min-h-[400px] md:min-h-[500px]">
+                    <div className="flex-1 min-h-[400px] lg:min-h-[600px]">
                         <Diagram
                             step={currentStep}
-                            onComponentClick={handleComponentClick}
                         />
                     </div>
 
@@ -117,7 +107,7 @@ const InternalsPage: React.FC = () => {
                 </div>
 
                 {/* Right: Information */}
-                <div className="w-full md:w-80 flex flex-col gap-4">
+                <div className="w-full lg:w-96 flex flex-col gap-4">
 
                     {/* Step Description Card */}
                     <div className="bg-slate-900/80 backdrop-blur border border-slate-800 rounded-2xl p-6 shadow-lg transition-all duration-300 hover:border-slate-700">
@@ -137,15 +127,6 @@ const InternalsPage: React.FC = () => {
                                     {comp}
                                 </span>
                             ))}
-                        </div>
-                    </div>
-
-                    {/* Removed AI Insight Card */}
-
-                    <div className="flex-1 border border-dashed border-slate-800 rounded-2xl flex items-center justify-center p-6 text-center text-slate-600">
-                        <div className="flex flex-col items-center gap-3">
-                            <Sparkles size={24} className="opacity-20" />
-                            <p className="text-xs">Visualization Mode Only (AI Disabled)</p>
                         </div>
                     </div>
 

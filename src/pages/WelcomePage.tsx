@@ -29,6 +29,14 @@ const WelcomePage: React.FC = () => {
             icon: Layers,
             gradient: 'from-cyan-500 to-blue-600',
             path: '/lakehouse'
+        },
+        {
+            id: 'advanced',
+            title: 'Advanced Concepts',
+            description: 'Deep dive into shuffle, DAG execution, lazy evaluation, Catalyst optimizer, fault tolerance, and more.',
+            icon: Sparkles,
+            gradient: 'from-purple-500 to-pink-600',
+            path: '/advanced'
         }
     ];
 
